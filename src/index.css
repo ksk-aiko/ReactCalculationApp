@@ -1,3 +1,75 @@
+/* src/App.css */
 body {
-  font-family: Arial, sans-serif;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .calculator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 400px; /* 幅を広げる */
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+  }
+  
+  .display {
+      width: 100%;
+      background-color: #222;
+      color: #fff;
+      text-align: right;
+      padding: 30px; /* パディングを維持 */
+      box-sizing: border-box;
+      font-size: 2.5em; /* フォントサイズを維持 */
+      height: 100px; /* 高さを指定 */
+  }
+  
+  
+  .button-pad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      width: 100%;
+  }
+  
+  .button {
+      background-color: #f9f9f9;
+      border: solid 1px #ccc;
+      height: 100px; /* 高さを増やす */
+      font-size: 2em; /* フォントサイズを大きくする */
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin: 5px; /* ボタン間の空間を追加 */
+  }
+  
+  .button:hover {
+      cursor: pointer;
+      background-color: #3f1cbc;
+  }
+  
+  .button:active {
+      background-color: #d0d0d0;
+  }
+  
+  .button.operator {
+      background-color: #ff9500;
+      color: #fff;
+      border: solid 1px #e08500;
+  }
+  
+  
+  .button.operator:hover {
+    background-color: #e08500;
+  }
+  
+  .button.double {
+    grid-column: span 2;
+  }
+  

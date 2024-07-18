@@ -1,0 +1,20 @@
+@startuml
+actor User
+participant Calculator
+participant Display
+participant ButtonPad
+participant Button
+
+User -> Button: Click
+Button -> Calculator: handleButtonClick()
+Calculator -> Display: updateInput()
+User -> Button: Click "="
+Button -> Calculator: handleEqualClick()
+Calculator -> Display: showResult()
+User -> Button: Click "AC"
+Button -> Calculator: handleClearClick()
+Calculator -> Display: clearInput()
+User -> Button: Click "▶️"
+Button -> Calculator: handleBackspaceClick()
+Calculator -> Display: deleteLastCharacter()
+@enduml

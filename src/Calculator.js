@@ -1,56 +1,43 @@
+// src/components/Calculator.js
 import React, { useState } from 'react';
-import './Calculator.css';
+import Display from './Display';
+import ButtonPad from './ButtonPad';
+import './index.css'; // 追加
 
 const Calculator = () => {
   const [input, setInput] = useState('');
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState('0');
 
-  const handleClick = (value) => {
-    setInput(input + value);
+  const handleButtonClick = (value) => {
+    setInput((prev) => prev + value);
   };
 
-  const handleClear = () => {
-    setInput('');
-    setResult('');
-  };
-
-  const handleDelete = () => {
-    setInput(input.slice(0, -1));
-  };
-
-  const handleCalculate = () => {
+  const handleEqualClick = () => {
     try {
-      setResult(eval(input)); // eval関数の使用には注意が必要
+      setResult(eval(input)); // Note: eval() is used here for simplicity. Consider using a safer alternative.
     } catch {
       setResult('error');
     }
   };
 
+  const handleClearClick = () => {
+    setInput('');
+    setResult('');
+  };
+
+  const handleBackspaceClick = () => {
+    setInput((prev) => prev.slice(0, -1));
+  };
+
   return (
     <div className="calculator">
-      <div className="display">
-        <div className="input">{input}</div>
-        <div className="result">{result}</div>
-      </div>
-      <div className="buttons">
-        <button onClick={() => handleClick('1')}>1</button>
-        <button onClick={() => handleClick('2')}>2</button>
-        <button onClick={() => handleClick('3')}>3</button>
-        <button onClick={() => handleClick('+')}>+</button>
-        <button onClick={() => handleClick('4')}>4</button>
-        <button onClick={() => handleClick('5')}>5</button>
-        <button onClick={() => handleClick('6')}>6</button>
-        <button onClick={() => handleClick('-')}>-</button>
-        <button onClick={() => handleClick('7')}>7</button>
-        <button onClick={() => handleClick('8')}>8</button>
-        <button onClick={() => handleClick('9')}>9</button>
-        <button onClick={() => handleClick('*')}>*</button>
-        <button onClick={() => handleClick('0')}>0</button>
-        <button onClick={() => handleClick('/')}>/</button>
-        <button onClick={handleCalculate}>=</button>
-        <button onClick={handleClear}>AC</button>
-        <button onClick={handleDelete}>▶️</button>
-      </div>
+      <Display input={input} result={result} />
+      <ButtonPad 
+        onButtonClick={handleButtonClick} 
+        onEqualClick={handleEqualClick} 
+        onClearClick={handleClearClick} 
+        onBackspaceClick={handleBackspaceClick} 
+      />
     </div>
   );
 };

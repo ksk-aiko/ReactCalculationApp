@@ -1,0 +1,23 @@
+@startuml
+actor User
+
+usecase "Input Number" as UC1
+usecase "Perform Addition" as UC2
+usecase "Perform Subtraction" as UC3
+usecase "Perform Multiplication" as UC4
+usecase "Perform Division" as UC5
+usecase "Calculate Result" as UC6
+usecase "Clear Input" as UC7
+usecase "Delete Last Character" as UC8
+usecase "Display Error" as UC9
+
+User -> UC1
+User -> UC2
+User -> UC3
+User -> UC4
+User -> UC5
+User -> UC6
+User -> UC7
+User -> UC8
+User -> UC9
+@enduml

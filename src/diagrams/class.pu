@@ -1,0 +1,28 @@
+@startuml
+class Calculator {
+  +input: String
+  +result: String
+  +handleButtonClick(value: String): void
+  +handleEqualClick(): void
+  +handleClearClick(): void
+  +handleBackspaceClick(): void
+}
+
+class Display {
+  +input: String
+  +result: String
+}
+
+class ButtonPad {
+  +buttons: List<Button>
+}
+
+class Button {
+  +value: String
+  +onClick(): void
+}
+
+Calculator --> Display
+Calculator --> ButtonPad
+ButtonPad --> Button
+@enduml

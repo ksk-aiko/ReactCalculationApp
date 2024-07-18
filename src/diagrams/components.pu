@@ -1,0 +1,9 @@
+@startuml component_diagram
+
+package "Calculator App" {
+  [Calculator] --> [Display]
+  [Calculator] --> [ButtonPad]
+  [ButtonPad] --> [Button]
+}
+
+@enduml
