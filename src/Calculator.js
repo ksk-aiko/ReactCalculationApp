@@ -1,45 +1,56 @@
-// src/components/Calculator.js
-import React, { useState } from 'react';
-import Display from './Display';
-import ButtonPad from './ButtonPad';
-import './index.css'; // 追加
+import React, { useState } from "react";
+
 
 const Calculator = () => {
-  const [input, setInput] = useState('');
-  const [result, setResult] = useState('0');
 
-  const handleButtonClick = (value) => {
-    setInput((prev) => prev + value);
-  };
+    const buttons = [
+        'AC', '▶️', '%', '/',
+        '7', '8', '9', '*',
+        '4', '5', '6', '-',
+        '1', '2', '3', '+',
+        '0', '.', '='
+    ];
 
-  const handleEqualClick = () => {
-    try {
-      setResult(eval(input)); // Note: eval() is used here for simplicity. Consider using a safer alternative.
-    } catch {
-      setResult('error');
+    const [input, setInput] = React.useState('');
+
+    const handleClick = (value) => {
+        if(value === 'AC') {
+            setInput('');
+            return;
+        }
+        else if(value === '▶️') {
+            setInput(input.slice(0, -1));
+            return;
+        }
+        else if(value === '=') {
+            try {
+                setInput(eval(input).toString());
+            } catch {
+                setInput('Error');
+            }
+        }
+        else {
+            setInput(input + value);
+        }
     }
-  };
+    
+    return (
+        <div className="calculator">
+            <div className="display">{input}</div>
+            <div className="button-pad">
+                {buttons.map((button, index) => (
+                    <button
+                        className  = 'button'
+                        key={index}
+                        onClick={() => handleClick(button)}
+                    >
+                        {button}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+}
 
-  const handleClearClick = () => {
-    setInput('');
-    setResult('');
-  };
-
-  const handleBackspaceClick = () => {
-    setInput((prev) => prev.slice(0, -1));
-  };
-
-  return (
-    <div className="calculator">
-      <Display input={input} result={result} />
-      <ButtonPad 
-        onButtonClick={handleButtonClick} 
-        onEqualClick={handleEqualClick} 
-        onClearClick={handleClearClick} 
-        onBackspaceClick={handleBackspaceClick} 
-      />
-    </div>
-  );
-};
 
 export default Calculator;
