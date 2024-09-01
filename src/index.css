@@ -7,10 +7,13 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-image: url('https://example.com/animal-background.jpg'); /* 動物の背景画像 */
+    background-size: cover;
+    background-position: center;
 }
 
 .calculator {
-    background-color: #ffebcd;
+    background-color: rgba(255, 235, 205, 0.9); /* 背景を少し透明にして背景画像を見えるようにする */
     border: 5px solid #ff69b4;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -26,7 +29,7 @@ body {
     margin-bottom: 20px;
     padding: 10px;
     text-align: right;
-    height: 50px;
+    height: 60px;
 }
 
 .button {
@@ -39,7 +42,7 @@ body {
     margin: 5px;
     padding: 20px;
     width: 60px;
-    height: 60px;
+    height: 80px;
     transition: background-color 0.3s;
 }
 

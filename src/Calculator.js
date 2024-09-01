@@ -1,8 +1,4 @@
-import React, { useState } from "react";
-
-
-const Calculator = () => {
-
+const Button = () => {
     const buttons = [
         'AC', '▶️', '%', '/',
         '7', '8', '9', '*',
@@ -10,8 +6,8 @@ const Calculator = () => {
         '1', '2', '3', '+',
         '0', '.', '='
     ];
-
-    const [input, setInput] = React.useState('');
+    
+    const [input, setInput] = useState('');
 
     const handleClick = (value) => {
         if(value === 'AC') {
@@ -33,24 +29,52 @@ const Calculator = () => {
             setInput(input + value);
         }
     }
-    
+
+    return (
+        <div>
+            {buttons.map((button, index) => (
+                <button
+                    className  = 'button'
+                    key={index}
+                    onClick={() => handleClick(button)}
+                >
+                    {button}
+                </button>
+            ))
+        }
+        </div>
+    )
+}
+
+const ButtonPad = () => {
+    return (
+        <div className="button-pad">
+            <Button />
+        </div>
+    )
+}
+
+const Display = ({input}) => {
+    return (
+        <div className="display">{input}</div>
+    )
+}
+
+const Calculator = () => {
     return (
         <div className="calculator">
-            <div className="display">{input}</div>
-            <div className="button-pad">
-                {buttons.map((button, index) => (
-                    <button
-                        className  = 'button'
-                        key={index}
-                        onClick={() => handleClick(button)}
-                    >
-                        {button}
-                    </button>
-                ))}
-            </div>
+            <Display />
+            <ButtonPad />
         </div>
     );
 }
 
+const App = () => {
+    return (
+        <div>
+            <Calculator />
+        </div>
+    );
+}
 
-export default Calculator;
+ReactDOM.render(<App />, document.getElementById('root'));
