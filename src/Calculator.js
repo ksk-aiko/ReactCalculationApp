@@ -7,7 +7,7 @@ const Button = () => {
         '0', '.', '='
     ];
     
-    const [input, setInput] = useState('');
+    // const [input, setInput] = useState('');
 
     const handleClick = (value) => {
         if(value === 'AC') {
@@ -77,4 +77,4 @@ const App = () => {
     );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));
