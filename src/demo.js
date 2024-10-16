@@ -2,36 +2,34 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const Demo = () => {
-    const [country, setCountry] = useState(null);
+function useFormField(initialValue) {
+    const [value, setValue] = useState(initialValue);
 
-    useEffect(() => {
-        // Fetch a random country from the API
-        fetch('https://restcountries.com/v2/all')
-            .then(response => response.json())
-            .then(data => {
-                // Set the random country to the state
-                const randomCountry = data[Math.floor(Math.random() * data.length)];
-                setCountry(randomCountry);
-            })
-    // [] means that this effect will only run once after the initial render
-    }, []);
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    };
+
+    return {
+        value,
+        onChange: handleChange,
+    };
+}
+
+const Demo = () => {
+    const name = useFormField("");
+    const email = useFormField("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert(`Name: ${name}, Email: ${email}`);
+    };
 
     return (
-        <div>
-            <h1>Random Country Infomation</h1>
-            {country ? (
-                <div>
-                    <h2>{country.name}</h2>
-                    <p>Capital: {country.capital}</p>
-                    <p>Population: {country.population.toLocaleString()}</p>
-                    <p>language: {country.languages.map(lang => lang.name).join(', ')}</p>
-                    <img src={country.flag} alt={`Flag of ${country.name}`} className="flagImage"/>
-                </div>
-            ) : (
-                <p>Loading...</p>
-            )}
-        </div>
+        <form onSubmit={handleSubmit}> 
+            <input type="text" {...name} placeholder="Name"/>
+            <input type="email" {...email} placeholder="Email"/>
+            <button type="submit">Submit</button>
+        </form>
     )
 }
 
