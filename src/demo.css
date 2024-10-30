@@ -1,6 +1,6 @@
 /* demo.css */
 
-body {
+ body {
     font-family: 'Arial', sans-serif;
     background-color: #f0f0f0;
     display: flex;
@@ -66,4 +66,4 @@ button {
     border-radius: 0.25rem;
     padding: 1rem;
     margin-top: 1rem;
-}
+} 
