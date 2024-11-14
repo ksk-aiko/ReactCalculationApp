@@ -1,38 +1,37 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-
-// Context
-const ThemeContext = React.createContext('light');
+// useReducerをインポート
+import { useReducer } from "react";
 
 const Demo = () => {
-    const Toolbar = () => {
-        return (
-            <div>
-                <ThemedButton />
-            </div>
-        );
+    function counterReducer(state, action) {
+        switch (action.type) {
+            case 'increment':
+                return { count: state.count + 1 };
+            case 'decrement':
+                return { count: state.count - 1 };
+            default:
+                throw new Error();
+        }
     }
 
-    const ThemedButton = () => {
-        // Use the Consumer to grab the current theme
-        const theme = React.useContext(ThemeContext);
-        // useEffect hook to log the current theme
-        useEffect(() => {
-            console.log(`現在のテーマ: ${theme}`);
-        }, [theme]);
+    function Counter() {
+        const [state, dispatch] = useReducer(counterReducer, { count: 0 });
 
-        const buttonClassName =  theme === 'dark' ? 'button-dark' : 'button-light';
-
-        return <button className={buttonClassName}>I am styled by theme context!</button>
-        
+        return (
+            <>
+                Count: {state.count}
+                <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+                <button onClick={() => dispatch({type: 'increment'})}>+</button>
+            </>
+        )
     }
 
     return (
-        // Passes the current theme to the value prop
-        <ThemeContext.Provider value="dark">
-            <Toolbar />
-        </ThemeContext.Provider>
+        <div>
+            <Counter />
+        </div>
     );
 }
 
